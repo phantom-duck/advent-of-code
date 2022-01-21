@@ -1,0 +1,6 @@
+Authentication via GitHub
+Made available to adventofcode.com: 
+  Name: phantom-duck
+  GitHub link: https://github.com/phantom-duck
+
+Advent of code identification code: 775179-20191205-a9b53929

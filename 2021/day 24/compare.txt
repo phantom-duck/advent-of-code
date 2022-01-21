@@ -1,0 +1,72 @@
+inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     inp w     
+mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   
+add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   add x z   
+mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  
+
+div z 1   div z 1   div z 1   div z 26  div z 1   div z 1   div z 1   div z 26  div z 1   div z 26  div z 26  div z 26  div z 26  div z 26  
+add x 14  add x 10  add x 13  add x -8  add x 11  add x 11  add x 14  add x -11 add x 14  add x -1  add x -8  add x -5  add x -16 add x -6  
+
+eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   eql x w   
+eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   
+mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   
+add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  add y 25  
+mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   
+add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   add y 1   
+mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   mul z y   
+mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   
+add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   add y w   
+
+add y 12  add y 9   add y 8   add y 3   add y 0   add y 11  add y 10  add y 13  add y 3   add y 10  add y 10  add y 14  add y 6   add y 5   
+
+mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   mul y x   
+add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   add z y   
+
+
+for var1, var2, var3, IN in zip(
+var1: [1,  1,  1,  26,  1,  1,  1,  26,  1, 26, 26, 26,  26, 26],
+var2: [14, 10, 13, -8, 11, 11, 14, -11, 14, -1, -8, -5, -16, -6],
+var3: [12, 9,  8,   3,  0, 11, 10,  13,  3, 10, 10, 14,   6, 5]
+[1-9] * 14
+):
+	w <- IN
+	x <- z mod 26 + var2
+	x <- if x == w then 0 else 1
+	z <- (z div var1) * (25 * x + 1) + (w + var3) * x
+	
+	w <- IN
+	x <- z mod 26 + var2
+	if x == w:
+		z <- z div var1
+	else:
+		z <- 26 * (z div var1) + w + var3
+
+z: 0, 
+	D1 + 12, 
+	26 * (D1 + 12) + D2 + 9, 
+	26 * (26 * (D1 + 12) + D2 + 9) + D3 + 8,
+	if D3 == D4 then:
+		26 * (D1 + 12) + D2 + 9
+		26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0
+		26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11
+		26 * (26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11) + D7 + 10
+		if D7 == D8 + 1 then:
+			26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11
+			26 * (26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11) + D9 + 3
+			if D9 + 2 == D10 then:
+				26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11
+				if D6 + 3 == D11 then:
+					26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0
+					if D5 - 5 == D12:
+						26 * (D1 + 12) + D2 + 9
+						if D2 - 7 == D13:
+							D1 + 12
+							if D1 + 6 == D14:
+								0
+			else:
+				26 * (26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11) + D10 + 10
+		else:
+			26 * (26 * (26 * (26 * (D1 + 12) + D2 + 9) + D5 + 0) + D6 + 11) + D8 + 13
+	else:
+		26 * (26 * (D1 + 12) + D2 + 9) + D4 + 3
+
+A(B+7)CC(D+5)E(F+1)FG(G+2)(E+3)DB(A+6)
